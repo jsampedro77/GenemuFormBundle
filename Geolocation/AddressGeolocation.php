@@ -14,13 +14,13 @@ namespace Genemu\Bundle\FormBundle\Geolocation;
 /**
  * @author Olivier Chauvel <olivier@generation-multiple.com>
  */
-class AddressGeolocation implements \Serializable
+class AddressGeolocation implements \Serializable, \ArrayAccess
 {
-    private $address;
-    private $latitude;
-    private $longitude;
-    private $locality;
-    private $country;
+    public $address;
+    public $latitude;
+    public $longitude;
+    public $locality;
+    public $country;
 
     public function __construct($address, $latitude = null, $longitude = null, $locality = null, $country = null)
     {
@@ -36,52 +36,26 @@ class AddressGeolocation implements \Serializable
         return $this->address;
     }
     
-    public function setAddress($address)
-    {
-        return $this->address = $address;
-    }
 
     public function getLatitude()
     {
         return $this->latitude;
     }
     
-    public function setLatitude($latitude)
-    {
-        return $this->latitude = $latitude;
-    }
-
     public function getLongitude()
     {
         return $this->longitude;
-    }
-
-    public function setLongitude($longitude)
-    {
-        return $this->longitude = $longitude;
     }
 
     public function getLocality()
     {
         return $this->locality;
     }
-     
-    public function setLocality($locatity)
-    {
-        return $this->locality = $locality;
-    }
-    
 
     public function getCountry()
     {
         return $this->country;
     }
-    
-    public function setCountry($country)
-    {
-        return $this->country = $country;
-    }
-
 
     public function serialize()
     {
@@ -103,5 +77,25 @@ class AddressGeolocation implements \Serializable
         $this->longitude = $data['longitude'] ?: null;
         $this->locality = $data['locality'] ?: null;
         $this->country = $data['country'] ?: null;
+    }
+
+    public function offsetExists($offset)
+    {
+        return in_array($offset, array('address', 'latitude', 'longitude', 'locality', 'country'));
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->$offset;
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        $this->$offset = $value;
+    }
+
+    public function offsetUnset($offset)
+    {
+        $this->$offset = null;
     }
 }
