@@ -35,10 +35,20 @@ class AddressGeolocation implements \Serializable
     {
         return $this->address;
     }
+    
+    public function setAddress($address)
+    {
+        return $this->address = $address;
+    }
 
     public function getLatitude()
     {
         return $this->latitude;
+    }
+    
+    public function setLatitude($latitude)
+    {
+        return $this->latitude = $latitude;
     }
 
     public function getLongitude()
@@ -46,15 +56,32 @@ class AddressGeolocation implements \Serializable
         return $this->longitude;
     }
 
+    public function setLongitude($longitude)
+    {
+        return $this->longitude = $longitude;
+    }
+
     public function getLocality()
     {
         return $this->locality;
     }
+     
+    public function setLocality($locatity)
+    {
+        return $this->locality = $locality;
+    }
+    
 
     public function getCountry()
     {
         return $this->country;
     }
+    
+    public function setCountry($country)
+    {
+        return $this->country = $country;
+    }
+
 
     public function serialize()
     {
