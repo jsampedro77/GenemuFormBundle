@@ -55,9 +55,9 @@ class GeolocationType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars = array_replace($view->vars, array(
-            'configs'   => array(),
+            'configs'   => array('mapOptions'=>$options['map']['configs']),
             'elements'  => array(),
-            'map' => $options['map']
+            'map' => $options['map']['enabled']
         ));
     }
 
@@ -67,7 +67,10 @@ class GeolocationType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'map' => false,
+            'map' => array(
+                'enabled' => false,
+                'configs' => array(),
+            ),
             'latitude' => array(
                 'enabled' => false,
                 'hidden' => false,
